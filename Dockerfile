@@ -1,4 +1,4 @@
-# Step 1: Build TS
+# Step 2: Build TS
 FROM node:alpine AS builder
 WORKDIR /app
 
