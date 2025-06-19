@@ -22,5 +22,5 @@ services:
     env_file:
       - .env
 
-volumes:
-  - pgData:/var/lib/postgresql/data
+# volumes:
+#   - pgData:/var/lib/postgresql/data
