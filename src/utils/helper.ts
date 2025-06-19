@@ -1,4 +1,4 @@
-import { bucket } from "../config/fairebase";
+// import { bucket } from "../config/fairebase";
 import { PassThrough } from "stream";
 import nodemailer from "nodemailer";
 import Handlebars from "handlebars";
@@ -66,54 +66,54 @@ export const sendEmailWithSMTP = async ({
     }
 };
 
-export const generateBadge = async (userId: string, html: string) => {
-    try {
-        const pdfFileName = `badge-${userId}-${Date.now()}.pdf`;
-        const file = bucket.file(`badges/${pdfFileName}`);
+// export const generateBadge = async (userId: string, html: string) => {
+//     try {
+//         const pdfFileName = `badge-${userId}-${Date.now()}.pdf`;
+//         const file = bucket.file(`badges/${pdfFileName}`);
 
-        const browser = await puppeteer.launch({
-            headless: true,
-            args: ["--no-sandbox", "--disable-setuid-sandbox"],
-        });
+//         const browser = await puppeteer.launch({
+//             headless: true,
+//             args: ["--no-sandbox", "--disable-setuid-sandbox"],
+//         });
 
-        const page = await browser.newPage();
-        await page.setContent(html, { waitUntil: "networkidle0" });
+//         const page = await browser.newPage();
+//         await page.setContent(html, { waitUntil: "networkidle0" });
 
-        const pdfBuffer = await page.pdf({
-            format: "A5",
-            printBackground: true,
-            margin: { top: "0.5cm", bottom: "0.5cm", left: "0.5cm", right: "0.5cm" },
-        });
+//         const pdfBuffer = await page.pdf({
+//             format: "A5",
+//             printBackground: true,
+//             margin: { top: "0.5cm", bottom: "0.5cm", left: "0.5cm", right: "0.5cm" },
+//         });
 
-        await browser.close();
+//         await browser.close();
 
-        const passthroughStream = new PassThrough();
-        passthroughStream.end(pdfBuffer);
+//         const passthroughStream = new PassThrough();
+//         passthroughStream.end(pdfBuffer);
 
-        await new Promise<void>((resolve, reject) => {
-            passthroughStream
-                .pipe(
-                    file.createWriteStream({
-                        metadata: {
-                            contentType: "application/pdf",
-                        },
-                        resumable: false,
-                    })
-                )
-                .on("error", reject)
-                .on("finish", resolve);
-        });
+//         await new Promise<void>((resolve, reject) => {
+//             passthroughStream
+//                 .pipe(
+//                     file.createWriteStream({
+//                         metadata: {
+//                             contentType: "application/pdf",
+//                         },
+//                         resumable: false,
+//                     })
+//                 )
+//                 .on("error", reject)
+//                 .on("finish", resolve);
+//         });
 
-        await file.makePublic();
+//         await file.makePublic();
 
-        return file.publicUrl();
-    } catch (error) {
-        throw new Error(
-            `Failed to generate badge: ${error instanceof Error ? error.message : "Unknown error"
-            }`
-        );
-    }
-};
+//         return file.publicUrl();
+//     } catch (error) {
+//         throw new Error(
+//             `Failed to generate badge: ${error instanceof Error ? error.message : "Unknown error"
+//             }`
+//         );
+//     }
+// };
 
 export const generateRandomKey = (length: number) => {
     let chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
