@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import {
   createTemplate,
-  generateBadge,
+  // generateBadge,
   sendEmailWithSMTP,
   generateRandomKey,
 } from "../utils/helper";
@@ -178,19 +178,19 @@ export const approveBadge = async (
       expDate.setFullYear(expDate.getFullYear() + 10);
       const formattedExpDate = expDate.toISOString().split("T")[0];
 
-      const html = await createTemplate("certificate", {
-        bgUrl: bgUrl,
-        name: findUser.fullName || "User",
-        issueDate,
-        expDate: formattedExpDate,
-        profilePic,
-      });
+      // const html = await createTemplate("certificate", {
+      //   bgUrl: bgUrl,
+      //   name: findUser.fullName || "User",
+      //   issueDate,
+      //   expDate: formattedExpDate,
+      //   profilePic,
+      // });
 
-      const pdfFileName = await generateBadge(userId, html);
+      // const pdfFileName = await generateBadge(userId, html);
 
       await updateUsersData(
         {
-          badgeFileName: pdfFileName,
+          // badgeFileName: pdfFileName,
           badgeRequestStatus: approved == 2 ? 2 : 1,
         },
         { id: findUser.id }
