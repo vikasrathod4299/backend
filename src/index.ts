@@ -22,7 +22,7 @@ app.use(cors({
 
 app.use('/api/badges', express.static(path.join(__dirname, '../documents')));
 app.get('/', (req, res) => {
-    res.send('Welcome to the API haha');
+    res.send('Welcome to the API');
 });
 app.use("/api", route)
 app.use(errorConverter)
