@@ -1,0 +1,26 @@
+
+services:
+  postgres-db:
+    image: postgres:15
+    restart: always
+    env_file:
+      - .env.db
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  node-api:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    env_file:
+      - .env
+
+volumes:
+  - pgData:/var/lib/postgresql/data

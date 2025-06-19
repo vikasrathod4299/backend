@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certificate</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Georgia", serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .wrapper {
+        background: url("{{bgUrl}}");
+        background-size: cover;
+        display: flex;
+        padding: 100px;
+        align-items: center;
+        justify-content: center;
+        width: 449px;
+        height: 612px;
+        position: relative;
+      }
+
+      .text {
+        font-size: 14px;
+        color: #687a83;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: 600;
+      }
+
+      .date-text {
+        /* font-family: "Times New Roman", Times, serif; */
+        font-size: 12px;
+      }
+
+      .user-image {
+        width: 100px;
+        height: 136px;
+        position: absolute;
+        top: 382px;
+        left: 67px;
+        object-fit: cover;
+      }
+
+      .user-name {
+        position: absolute;
+        top: 383px;
+        left: 217px;
+      }
+
+      .doi {
+        position: absolute;
+        top: 469px;
+        left: 244px;
+      }
+
+      .validity {
+        position: absolute;
+        top: 489px;
+        left: 244px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrapper">
+      <img src="{{profilePic}}" alt="User Photo" class="user-image" />
+      <p class="user-name text">{{name}}</p>
+      <p class="doi text date-text">{{issueDate}}</p>
+      <p class="validity text date-text">{{expDate}}</p>
+    </div>
+  </body>
+</html>
